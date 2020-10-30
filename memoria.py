@@ -17,6 +17,9 @@ state = {'mark': None}
 #Al inicio todos los cuadros estan 'escondidos'
 hide = [True] * 64
 
+stateScore = {'score': 0}
+writer = Turtle(visible=False)
+
 #Funcion que dibuja los cuadros que el usuario podrá seleccionar
 def square(x, y):
     "Draw white square with black outline at (x, y)."
@@ -59,9 +62,15 @@ def tap(x, y):
         hide[spot] = False
         hide[mark] = False
         state['mark'] = None
+        stateScore['score'] += 1
 
 #Función que muestra el tablero dependiendo del estado de cada cuadro (hide = None o False)
 def draw():
+    
+    #Se escribe el puntaje actual.
+    writer.color('orange')
+    writer.write(stateScore['score'], font=('Arial', 15, 'bold'))
+    clear()
     
     #Se dibuja la imágen de fondo.
     "Draw image and tiles."
@@ -88,13 +97,16 @@ def draw():
         write(tiles[mark], font=('Arial', 25, 'normal'))
 
     update()
-    ontimer(draw, 100)
+    ontimer(draw, 10)
 
 shuffle(tiles)
 setup(420, 420, 370, 0)
+
 addshape(car)
 hideturtle()
+writer.goto(185, 170)
 tracer(False)
+
 onscreenclick(tap)
 draw()
 done()
