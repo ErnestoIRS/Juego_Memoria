@@ -9,7 +9,7 @@ from freegames import path
 car = path('car.gif')
 
 #Número de cuadros en la ventana 
-tiles = list(range(32)) * 2
+tiles = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','ñ','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E']*2
 
 #Variable que indica el estado de cada cuadro
 state = {'mark': None}
@@ -83,9 +83,9 @@ def draw():
     if mark is not None and hide[mark]:
         x, y = xy(mark)
         up()
-        goto(x + 1.5, y - 1)
+        goto(x + 14, y + 3)
         color('black')
-        write(tiles[mark], font=('Arial', 25, 'center'))
+        write(tiles[mark], font=('Arial', 25, 'normal'))
 
     update()
     ontimer(draw, 100)
