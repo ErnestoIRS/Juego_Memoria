@@ -17,6 +17,7 @@ state = {'mark': None}
 #Al inicio todos los cuadros estan 'escondidos'
 hide = [True] * 64
 
+#Variable que indica el marcador
 stateScore = {'score': 0}
 writer = Turtle(visible=False)
 
@@ -67,11 +68,6 @@ def tap(x, y):
 #Función que muestra el tablero dependiendo del estado de cada cuadro (hide = None o False)
 def draw():
     
-    #Se escribe el puntaje actual.
-    writer.color('orange')
-    writer.write(stateScore['score'], font=('Arial', 15, 'bold'))
-    clear()
-    
     #Se dibuja la imágen de fondo.
     "Draw image and tiles."
     clear()
@@ -95,15 +91,27 @@ def draw():
         goto(x + 14, y + 3)
         color('black')
         write(tiles[mark], font=('Arial', 25, 'normal'))
+    
+    #Se escribe el puntaje actual.
+    writer.color('orange')
+    writer.write(stateScore['score'], font=('Arial', 15, 'bold'))
+    
+    #Si todos los cuadros se encuentran volteados, se termina el juego
+    if (hide == [False] * 64):
+        print ("Juego terminado")
+        return
 
     update()
     ontimer(draw, 10)
 
+#Se hace el acomodo de tiles
 shuffle(tiles)
 setup(420, 420, 370, 0)
 
 addshape(car)
 hideturtle()
+
+#Se indica la posición del marcador
 writer.goto(185, 170)
 tracer(False)
 
