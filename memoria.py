@@ -5,23 +5,23 @@ from random import *
 from turtle import *
 from freegames import path
 
-#imágen de fondo.
+#Imágen de fondo.
 car = path('car.gif')
 
-#Número de cuadros en la ventana 
+#Número de cuadros en la ventana. 32*2 para cumplir los 64 cuadros en parejas. 
 tiles = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','ñ','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E']*2
 
 #Variable que indica el estado de cada cuadro
 state = {'mark': None}
 
-#Al inicio todos los cuadros estan 'escondidos'
+#Variable que indica que al inicio todos los cuadros estan 'escondidos'.
 hide = [True] * 64
 
-#Variable que indica el marcador
+#Variable que indica el marcador.
 stateScore = {'score': 0}
 writer = Turtle(visible=False)
 
-#Funcion que dibuja los cuadros que el usuario podrá seleccionar
+#Función que dibuja los cuadros que el usuario podrá seleccionar.
 def square(x, y):
     "Draw white square with black outline at (x, y)."
     up()
@@ -30,7 +30,7 @@ def square(x, y):
     color('black', 'white')
     begin_fill()
     
-    #Medidas del cuadrado
+    #Medidas del cuadrado.
     for count in range(4):
         forward(50)
         left(90)
@@ -65,7 +65,7 @@ def tap(x, y):
         state['mark'] = None
         stateScore['score'] += 1
 
-#Función que muestra el tablero dependiendo del estado de cada cuadro (hide = None o False)
+#Función que muestra el tablero dependiendo del estado de cada cuadro (hide = None o False).
 def draw():
     
     #Se dibuja la imágen de fondo.
@@ -75,7 +75,7 @@ def draw():
     shape(car)
     stamp()
 
-    #Si el estado del cuadro es 'escondido', se dibuja el cuadro blanco
+    #Si el estado del cuadro es 'escondido', se dibuja el cuadro blanco.
     for count in range(64):
         if hide[count]:
             x, y = xy(count)
@@ -96,7 +96,7 @@ def draw():
     writer.color('orange')
     writer.write(stateScore['score'], font=('Arial', 15, 'bold'))
     
-    #Si todos los cuadros se encuentran volteados, se termina el juego
+    #Si todos los cuadros se encuentran volteados, se termina el juego.
     if (hide == [False] * 64):
         print ("Juego terminado")
         return
@@ -104,14 +104,14 @@ def draw():
     update()
     ontimer(draw, 10)
 
-#Se hace el acomodo de tiles
+#Se hace el acomodo de tiles.
 shuffle(tiles)
 setup(420, 420, 370, 0)
 
 addshape(car)
 hideturtle()
 
-#Se indica la posición del marcador
+#Se indica la posición del marcador.
 writer.goto(185, 170)
 tracer(False)
 
