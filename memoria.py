@@ -14,6 +14,10 @@ tiles = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','ñ','o','p','q
 #Variable que indica el estado de cada cuadro
 state = {'mark': None}
 
+#Variable que indica el número de clicks que se han hecho
+global tapCount
+tapCount = 0
+
 #Variable que indica que al inicio todos los cuadros estan 'escondidos'.
 hide = [True] * 64
 
@@ -49,9 +53,12 @@ def xy(count):
 #Función que controla lo que sucede al dar click en un cuadro.
 def tap(x, y):
     "Update mark and hidden tiles based on tap."
+    global tapCount
+    tapCount = tapCount + 1
     spot = index(x, y)
     mark = state['mark']
-    
+    print('El número de clicks que llevas son:', tapCount)
+
     #Condiciones para determinar que los numeros NO COINCIDEN y los cuadros regresan a su estado original.
     if mark is None or mark == spot or tiles[mark] != tiles[spot]:
         print("aqui if")
@@ -64,6 +71,7 @@ def tap(x, y):
         hide[mark] = False
         state['mark'] = None
         stateScore['score'] += 1
+    
 
 #Función que muestra el tablero dependiendo del estado de cada cuadro (hide = None o False).
 def draw():
@@ -95,8 +103,8 @@ def draw():
     #Se escribe el puntaje actual.
     writer.color('orange')
     writer.write(stateScore['score'], font=('Arial', 15, 'bold'))
-    
-    #Si todos los cuadros se encuentran volteados, se termina el juego.
+
+#Si todos los cuadros se encuentran volteados, se termina el juego.
     if (hide == [False] * 64):
         print ("Juego terminado")
         return
