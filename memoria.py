@@ -11,10 +11,10 @@ car = path('car.gif')
 #Número de cuadros en la ventana. 32*2 para cumplir los 64 cuadros en parejas. 
 tiles = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','ñ','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E']*2
 
-#Variable que indica el estado de cada cuadro
+#Variable que indica el estado de cada cuadro.
 state = {'mark': None}
 
-#Variable que indica el número de clicks que se han hecho
+#Variable que indica el número de clicks que se han hecho.
 global tapCount
 tapCount = 0
 
@@ -53,6 +53,8 @@ def xy(count):
 #Función que controla lo que sucede al dar click en un cuadro.
 def tap(x, y):
     "Update mark and hidden tiles based on tap."
+    
+    #Se llama el contador de clicks y se suma cada click.
     global tapCount
     tapCount = tapCount + 1
     spot = index(x, y)
@@ -72,7 +74,6 @@ def tap(x, y):
         state['mark'] = None
         stateScore['score'] += 1
     
-
 #Función que muestra el tablero dependiendo del estado de cada cuadro (hide = None o False).
 def draw():
     
